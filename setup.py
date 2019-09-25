@@ -1,11 +1,17 @@
-from setuptools import setup
+# -*- coding:utf-8 -*-
 
-setup(
-    name='canal-python',
-    version='0.4',
-    packages=['canal', 'canal.protocol'],
-    author='haoyue',
-    author_email='haolee1990@qq.com',
-    license='MIT',
-    url='https://github.com/haozi3156666/canal-python'
+import setuptools
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
+    name="canal-py2",
+    version="0.4",
+    author="magic",
+    author_email="guanpeixiang@foxmail.com",
+    description="A canal-cilent for python2",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url='https://github.com/Guanpx/canal-python'
 )
