@@ -1,12 +1,11 @@
-#!/usr/bin/env python3
-
 import time
-import struct
-from .connector import Connector
-from .protocol import CanalProtocol_pb2
-from .protocol import EntryProtocol_pb2
 
-class Client(object):
+from connector import Connector
+from protocol import CanalProtocol_pb2
+from protocol import EntryProtocol_pb2
+
+
+class Client:
 
     def __init__(self):
         self.connector = Connector()
@@ -31,7 +30,7 @@ class Client(object):
         packet = CanalProtocol_pb2.Packet()
         packet.type = CanalProtocol_pb2.PacketType.CLIENTAUTHENTICATION
         packet.body = client_auth.SerializeToString()
-        
+
         self.connector.write_with_header(packet.SerializeToString())
 
         data = self.connector.read_next_packet()
@@ -43,13 +42,14 @@ class Client(object):
         ack = CanalProtocol_pb2.Ack()
         ack.MergeFromString(packet.body)
         if ack.error_code > 0:
-            raise Exception('something goes wrong when doing authentication. error code:%s, error message:%s' % (ack.error_code, ack.error_message))
+            raise Exception('something goes wrong when doing authentication. error code:%s, error message:%s' % (
+            ack.error_code, ack.error_message))
         print('Auth succed')
 
     def subscribe(self, client_id=b'1001', destination=b'example', filter=b'.*\\..*'):
         self.client_id = client_id
         self.destination = destination
-        
+
         self.rollback(0)
 
         sub = CanalProtocol_pb2.Sub()
@@ -60,7 +60,7 @@ class Client(object):
         packet = CanalProtocol_pb2.Packet()
         packet.type = CanalProtocol_pb2.PacketType.SUBSCRIPTION
         packet.body = sub.SerializeToString()
-        
+
         self.connector.write_with_header(packet.SerializeToString())
 
         data = self.connector.read_next_packet()
@@ -72,7 +72,8 @@ class Client(object):
         ack = CanalProtocol_pb2.Ack()
         ack.MergeFromString(packet.body)
         if ack.error_code > 0:
-            raise Exception('Failed to subscribe. error code:%s, error message:%s' % (ack.error_code, ack.error_message))
+            raise Exception(
+                'Failed to subscribe. error code:%s, error message:%s' % (ack.error_code, ack.error_message))
         print('Subscribe succed')
 
     def unsubscribe(self):
@@ -146,6 +147,7 @@ class Client(object):
         packet.body = cb.SerializeToString()
 
         self.connector.write_with_header(packet.SerializeToString())
+
 
 if __name__ == "__main__":
     client = Client()

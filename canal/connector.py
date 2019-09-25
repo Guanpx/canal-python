@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
-
 import socket
 import struct
 
-class Connector(object):
 
+class Connector:
     sock = None
     packet_len = 4
 

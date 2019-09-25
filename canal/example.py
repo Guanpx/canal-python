@@ -1,15 +1,17 @@
-#!/usr/bin/env python3
+
 
 import time
+import sys
 
-from .client import Client
-from .protocol import EntryProtocol_pb2
-from .protocol import CanalProtocol_pb2
+
+from client import Client
+from protocol import EntryProtocol_pb2
+from protocol import CanalProtocol_pb2
 
 client = Client()
-client.connect(host='172.12.0.13')
-client.check_valid()
-client.subscribe()
+client.connect(host='localhost', port=11111)
+client.check_valid("canal", "canal")
+client.subscribe(destination="example")
 
 while True:
     message = client.get(100)
