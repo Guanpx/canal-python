@@ -52,6 +52,7 @@ python 2.7 （canal-python支持python3）
 ### 构建canal python客户端
 
 ````shell
+# maybe pip2
 pip install canal-py2
 ````
 

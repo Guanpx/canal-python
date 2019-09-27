@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# coding: utf8
 
 import setuptools
 
@@ -7,11 +7,12 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="canal-py2",
-    version="0.4",
+    version="0.5",
     author="magic",
     author_email="guanpeixiang@foxmail.com",
     description="A canal-cilent for python2",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/Guanpx/canal-python'
+    url='https://github.com/Guanpx/canal-python',
+    packages=setuptools.find_packages(),
 )

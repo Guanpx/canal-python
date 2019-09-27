@@ -1,12 +1,9 @@
-
+# coding: utf8
 
 import time
-import sys
-
 
 from client import Client
 from protocol import EntryProtocol_pb2
-from protocol import CanalProtocol_pb2
 
 client = Client()
 client.connect(host='localhost', port=11111)

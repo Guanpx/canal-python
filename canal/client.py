@@ -1,3 +1,5 @@
+# coding: utf8
+
 import time
 
 from connector import Connector
@@ -43,7 +45,7 @@ class Client:
         ack.MergeFromString(packet.body)
         if ack.error_code > 0:
             raise Exception('something goes wrong when doing authentication. error code:%s, error message:%s' % (
-            ack.error_code, ack.error_message))
+                ack.error_code, ack.error_message))
         print('Auth succed')
 
     def subscribe(self, client_id=b'1001', destination=b'example', filter=b'.*\\..*'):
